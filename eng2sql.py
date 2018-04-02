@@ -28,11 +28,6 @@ models are more common in this domain.
     - Append the sampled character to the target sequence
     - Repeat until we generate the end-of-sequence character or we
         hit the character limit.
-# Data download
-English to French sentence pairs.
-http://www.manythings.org/anki/fra-eng.zip
-Lots of neat sentence pairs datasets can be found at:
-http://www.manythings.org/anki/
 # References
 - Sequence to Sequence Learning with Neural Networks
     https://arxiv.org/abs/1409.3215
@@ -46,10 +41,11 @@ from keras.models import Model
 from keras.layers import Input, LSTM, Dense
 import numpy as np
 import h5py
+import random
 
-batch_size = 64  # Batch size for training.
-epochs = 200  # Number of epochs to train for.
-latent_dim = 256  # Latent dimensionality of the encoding space.
+batch_size = 32  # Batch size for training.
+epochs = 300  # Number of epochs to train for.
+latent_dim = 32  # Latent dimensionality of the encoding space.
 num_samples = 10000  # Number of samples to train on.
 # Path to the data txt file on disk.
 data_path = 'eng-sql/sql.txt'
@@ -59,10 +55,11 @@ input_texts = []
 target_texts = []
 input_characters = set()
 target_characters = set()
+lcnt = 0
 with open(data_path, 'r', encoding='utf-8') as f:
     lines = f.read().split('\n')
 for line in lines[: min(num_samples, len(lines) - 1)]:
-    print(line.split('^'))
+    #print(line.split('^'))
     input_text, target_text = line.split('^')
     # We use "tab" as the "start sequence" character
     # for the targets, and "\n" as "end sequence" character.
@@ -104,7 +101,11 @@ decoder_target_data = np.zeros(
     (len(input_texts), max_decoder_seq_length, num_decoder_tokens),
     dtype='float32')
 
-for i, (input_text, target_text) in enumerate(zip(input_texts, target_texts)):
+all_data = list(zip(input_texts, target_texts))
+random.shuffle(all_data[:75])
+print(all_data)
+print("=="*20)
+for i, (input_text, target_text) in enumerate(all_data):
     for t, char in enumerate(input_text):
         encoder_input_data[i, t, input_token_index[char]] = 1.
     for t, char in enumerate(target_text):
@@ -142,7 +143,7 @@ model.compile(optimizer='rmsprop', loss='categorical_crossentropy')
 model.fit([encoder_input_data, decoder_input_data], decoder_target_data,
           batch_size=batch_size,
           epochs=epochs,
-          validation_split=0.2)
+          validation_split=0.1)
 # Save model
 model.save('s2s.h5')
 
