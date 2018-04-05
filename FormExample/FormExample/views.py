@@ -5,13 +5,6 @@ from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 
 
-from keras.models import Model
-from keras.layers import Input, LSTM, Dense
-import numpy as np
-import h5py
-import random
-
-
 # disabling csrf (cross site request forgery)
 @csrf_exempt
 def index(request):
