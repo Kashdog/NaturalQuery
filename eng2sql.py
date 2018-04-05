@@ -111,7 +111,6 @@ model.fit([encoder_input_data, decoder_input_data], decoder_target_data,
 model.save('s2s.h5')
 
 # Next: inference mode (sampling).
-# Here's the drill:
 # 1) encode input and retrieve initial decoder state
 # 2) run one step of decoder with this initial state
 # and a "start of sequence" token as target.

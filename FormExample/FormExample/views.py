@@ -1,7 +1,15 @@
 # importing required packages
+from __future__ import print_function
 from django.http import HttpResponse
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
+
+
+from keras.models import Model
+from keras.layers import Input, LSTM, Dense
+import numpy as np
+import h5py
+import random
 
 
 # disabling csrf (cross site request forgery)
@@ -13,11 +21,15 @@ def index(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
+        
+        from . import eng2sql
+        
+
 
         # adding the values in a context variable
         context = {
             'name': name,
-            'email': email,
+            'email': eng2sql.translate_sentence(name),
             'phone': phone
         }
 
