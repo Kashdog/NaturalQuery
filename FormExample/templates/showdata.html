@@ -1,84 +1,124 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>Natural Query</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% load static %}
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'FormExample/table/images/icons/favicon.ico' %}"/>
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/table/vendor/bootstrap/css/bootstrap.min.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/table/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/table/vendor/animate/animate.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/table/vendor/select2/select2.min.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/table/vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/table/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/table/css/main.css' %}">
 <!--===============================================================================================-->
 </head>
 <body>
+	
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100 ver1">
+					
 
-
-	<div class="container-contact100">
-		<div class="wrap-contact100">
-			<form class="contact100-form validate-form">
-				<span class="label-input100">English Query:</span>
-				<span class="contact100-form-title">
-                        {{ name }}
-				</span>
-				<span class="label-input100">Translated SQL Query:</span>
-				<span class="contact100-form-title">
-						{{ email }}
-				</span>
-			</form>
+					<div class="table100-firstcol">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">{{ propertyNames.1 }}</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for datapoint in data %}
+								<tr class="row100 body">
+									<td class="cell100 column1">{{ datapoint.1 }}</td>	
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+					
+					<div class="wrap-table100-nextcols js-pscroll">
+						<div class="table100-nextcols">
+							<table>
+								<thead>
+									<tr class="row100 head">
+										{% for propertyName in propertyNames|slice:"2:" %}
+										{% with numero=forloop.counter|add:"1"|stringformat:"s" %}
+										{% with className="cell100 column"|add:numero %}
+										<th class="{{className}}">{{propertyName}}</th>
+										{% endwith %}
+										{% endwith %}
+										{% endfor %}
+									</tr>
+								</thead>
+								<tbody>
+									{% for datapoint in data %}
+									
+									<tr class="row100 body">
+									{% for datadot in datapoint|slice:"2:" %}
+									{% with numero=forloop.counter|add:"1"|stringformat:"s" %}
+									{% with className="cell100 column"|add:numero %}
+										<td class="{{className}}">{{datadot}}</td>
+									{% endwith %}	
+									{% endwith %}
+									{% endfor %}
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+				</div>
+			</div>
 		</div>
 	</div>
 
 
-
-	<div id="dropDownSelect1"></div>
-
+<!--===============================================================================================-->	
+	<script src="{% static 'FormExample/table/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="{% static 'FormExample/table/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'FormExample/table/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<script src="{% static 'FormExample/table/vendor/select2/select2.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
+	<script src="{% static 'FormExample/table/vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
 	<script>
-		$(".selection-2").select2({
-			minimumResultsForSearch: 20,
-			dropdownParent: $('#dropDownSelect1')
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+
+			$(this).on('ps-x-reach-start', function(){
+				$(this).parent().find('.table100-firstcol').removeClass('shadow-table100-firstcol');
+			});
+
+			$(this).on('ps-scroll-x', function(){
+				$(this).parent().find('.table100-firstcol').addClass('shadow-table100-firstcol');
+			});
+
 		});
+
+		
+		
+		
 	</script>
 <!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-23581568-13');
-</script>
+	<script src="{% static 'FormExample/table/js/main.js' %}"></script>
 
 </body>
 </html>

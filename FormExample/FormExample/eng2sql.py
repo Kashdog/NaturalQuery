@@ -186,7 +186,6 @@ for seq_index in range(39):
     print(seq_index)
     print('Input sentence:', input_texts[seq_index])
     print('Decoded sentence:', decoded_sentence)
-print('testing')
 
 def translate_sentence(eng):
     encoder_test_data = np.zeros(

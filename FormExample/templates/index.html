@@ -3,30 +3,23 @@
 <html lang="en">
 
 <head>
-	<title>Contact V4</title>
+	<title>Natural Query</title>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% load static %}
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/style.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/vendor/select2/select2.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/main.css' %}"/>
+	
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="{% static "images/icons/favicon.ico" %}"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'FormExample/images/icons/favicon.ico' %}"/> 
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/vendor/bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/vendor/animate/animate.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/vendor/css-hamburgers/hamburgers.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/vendor/animsition/css/animsition.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'FormExample/vendor/daterangepicker/daterangepicker.css' %}">
+
 </head>
 <body>
 
@@ -40,7 +33,7 @@
 
 				<div class="wrap-input100 validate-input" data-validate="Name is required">
 					<span class="label-input100">Your Query</span>
-                    <input class="input100" type="text" name="name" placeholder="Enter your query in English" size="50">
+                    <input class="input100" type="text" name="engquery" placeholder="Enter your query in English" size="50">
 					<span class="focus-input100"></span>
 				</div>
 
@@ -63,15 +56,14 @@
 
 	<div id="dropDownSelect1"></div>
 
-<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
+<!--===============================================================================================-
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script> 
+
 	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
 	<script src="vendor/bootstrap/js/popper.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
+	<script src="vendor/select2/select2.min.js"></script> -->
+
 	<script>
 		$(".selection-2").select2({
 			minimumResultsForSearch: 20,
@@ -81,9 +73,7 @@
 <!--===============================================================================================-->
 	<script src="vendor/daterangepicker/moment.min.js"></script>
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script> 
 	<script src="js/main.js"></script>
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
